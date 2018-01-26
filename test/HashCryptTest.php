@@ -58,6 +58,9 @@ class HashCryptTest extends TestCase
         );
 
         $this->assertSame(40, Binary::safeStrlen($hashCrypt->encrypt('')));
+        $this->assertSame(40, Binary::safeStrlen($hashCrypt->encrypt('', 'dhole')));
+        $this->assertSame('', $hashCrypt->decrypt($hashCrypt->encrypt('')));
+        $this->assertSame('', $hashCrypt->decrypt($hashCrypt->encrypt('', 'dhole'), 'dhole'));
         $this->assertSame(
             'test message goes here',
             $hashCrypt->decrypt($hashCrypt->encrypt('test message goes here'))
@@ -153,6 +156,9 @@ class HashCryptTest extends TestCase
         );
 
         $this->assertSame(50, Binary::safeStrlen($hashCrypt->encrypt('')));
+        $this->assertSame(50, Binary::safeStrlen($hashCrypt->encrypt('', 'dhole')));
+        $this->assertSame('', $hashCrypt->decrypt($hashCrypt->encrypt('')));
+        $this->assertSame('', $hashCrypt->decrypt($hashCrypt->encrypt('', 'dhole'), 'dhole'));
         $this->assertSame(
             'test message goes here',
             $hashCrypt->decrypt($hashCrypt->encrypt('test message goes here'))
@@ -249,6 +255,9 @@ class HashCryptTest extends TestCase
         );
 
         $this->assertSame(80, Binary::safeStrlen($hashCrypt->encrypt('')));
+        $this->assertSame(80, Binary::safeStrlen($hashCrypt->encrypt('', 'dhole')));
+        $this->assertSame('', $hashCrypt->decrypt($hashCrypt->encrypt('')));
+        $this->assertSame('', $hashCrypt->decrypt($hashCrypt->encrypt('', 'dhole'), 'dhole'));
         $this->assertSame(
             'test message goes here',
             $hashCrypt->decrypt($hashCrypt->encrypt('test message goes here'))
@@ -345,6 +354,9 @@ class HashCryptTest extends TestCase
 
 
         $this->assertSame(120, Binary::safeStrlen($hashCrypt->encrypt('')));
+        $this->assertSame(120, Binary::safeStrlen($hashCrypt->encrypt('', 'dhole')));
+        $this->assertSame('', $hashCrypt->decrypt($hashCrypt->encrypt('')));
+        $this->assertSame('', $hashCrypt->decrypt($hashCrypt->encrypt('', 'dhole'), 'dhole'));
         $this->assertSame(
             'test message goes here',
             $hashCrypt->decrypt($hashCrypt->encrypt('test message goes here'))
@@ -441,6 +453,9 @@ class HashCryptTest extends TestCase
 
 
         $this->assertSame(160, Binary::safeStrlen($hashCrypt->encrypt('')));
+        $this->assertSame(160, Binary::safeStrlen($hashCrypt->encrypt('', 'dhole')));
+        $this->assertSame('', $hashCrypt->decrypt($hashCrypt->encrypt('')));
+        $this->assertSame('', $hashCrypt->decrypt($hashCrypt->encrypt('', 'dhole'), 'dhole'));
         $this->assertSame(
             'test message goes here',
             $hashCrypt->decrypt($hashCrypt->encrypt('test message goes here'))

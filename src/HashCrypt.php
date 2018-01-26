@@ -82,6 +82,8 @@ class HashCrypt
     }
 
     /**
+     * Internal function made public for unit testing.
+     *
      * @param string $plaintext
      * @param string $aad
      * @param string $salt
@@ -101,12 +103,21 @@ class HashCrypt
         list ($encKey, $authKey) = $this->splitKey($salt);
 
         $len = Binary::safeStrlen($plaintext);
+
+        // Initialize our HMAC state with the authentication key
         $state = \hash_init($this->algo, HASH_HMAC, $authKey);
 
+        // Feed the extended nonce into the HMAC
         \hash_update($state, $salt);
         \hash_update($state, $nonce);
+
+        // Feed the length of the additional authenticated data, as a little-endian
+        // 64-bit unsigned integer, into the HMAC before the AAD itself.
         \hash_update($state, \pack('P', \mb_strlen($aad)));
         \hash_update($state, $aad);
+
+        // Feed the length of the message, as a little-endian 64-bit unsigned integer
+        // into the HMAC before the ciphertext.
         \hash_update($state, \pack('P', $len));
 
         $ciphertext = '';
@@ -127,6 +138,8 @@ class HashCrypt
     }
 
     /**
+     * Internal function made public for unit testing.
+     *
      * @param string $ciphertext
      * @param string $aad
      * @param string $salt
@@ -148,6 +161,7 @@ class HashCrypt
 
         $len = Binary::safeStrlen($ciphertext);
 
+        // Recalculate the HMAC of the ciphertext:
         $state = \hash_init($this->algo, HASH_HMAC, $authKey);
         \hash_update($state, $salt);
         \hash_update($state, $nonce);
@@ -156,10 +170,13 @@ class HashCrypt
         \hash_update($state, \pack('P', $len));
         \hash_update($state, $ciphertext);
         $calcMac = \hash_final($state, true);
+
+        // Validate the MAC. Fail if it doesn't match.
         if (!\hash_equals($calcMac, $mac)) {
             throw new CryptoException('Invalid message authentication code');
         }
 
+        // Let's decrypt the message
         $plaintext = '';
         $ctr = 0;
         for ($i = 0; $i < $len; $i += $this->hSize) {
@@ -174,6 +191,9 @@ class HashCrypt
     }
 
     /**
+     * We're converting our key, nonce, and counter into blocks of a keystream
+     * in order to create a stream cipher.
+     *
      * @param string $key
      * @param string $nonce
      * @param int $ctr
@@ -189,6 +209,8 @@ class HashCrypt
     }
 
     /**
+     * Get the size of the hash function being used.
+     *
      * @return int
      */
     public function getHashSize(): int
@@ -197,6 +219,12 @@ class HashCrypt
     }
 
     /**
+     * Split a key, using domain separation, into an Encryption Key
+     * and an Authentication Key.
+     *
+     * The domain separation constants are the bitwise inverses of the
+     * ipad and opad byte values for the HMAC standard (0x36 and 0x5c).
+     *
      * @param string $salt
      * @return array<int, string>
      */
