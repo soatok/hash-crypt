@@ -1,0 +1,24 @@
+{
+  "authors": [
+    {
+      "name": "Soatok Dreamseeker",
+      "homepage": "https://twitter.com/SoatokDhole",
+      "email": "soatok.dhole@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Soatok\\HashCrypt\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Soatok\\HashCrypt\\Tests\\": "test/"
+    }
+  },
+  "require": {
+    "paragonie/constant_time_encoding": "^2",
+    "phpunit/phpunit": "^6",
+    "vimeo/psalm": "^0"
+  }
+}
