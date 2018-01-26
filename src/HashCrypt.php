@@ -201,9 +201,10 @@ class HashCrypt
      */
     public function streamBlock(string $key, string $nonce, int $ctr): string
     {
-        return \hash(
+        return \hash_hmac(
             $this->algo,
-            $nonce . \pack('P', $ctr) . $key,
+            $nonce . \pack('P', $ctr),
+            $key,
             true
         );
     }
