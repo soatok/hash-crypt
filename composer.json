@@ -6,6 +6,7 @@
       "email": "soatok.dhole@gmail.com"
     }
   ],
+  "license": "ISC",
   "autoload": {
     "psr-4": {
       "Soatok\\HashCrypt\\": "src/"
@@ -17,8 +18,9 @@
     }
   },
   "require": {
+    "php": "^7",
     "paragonie/constant_time_encoding": "^2",
-    "phpunit/phpunit": "^6",
-    "vimeo/psalm": "^0"
+    "phpunit/phpunit": "^8",
+    "vimeo/psalm": "^3"
   }
 }

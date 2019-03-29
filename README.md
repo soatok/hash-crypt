@@ -1,5 +1,8 @@
 # Hash-Crypt
 
+[![Linux Build Status](https://travis-ci.org/soatok/hash-crypt.svg?branch=master)](https://travis-ci.org/soatok/hash-crypt)
+[![License](https://poser.pugx.org/soatok/hash-crypt/license)](https://packagist.org/packages/soatok/hash-crypt)
+
 > **Warning!** This is an experimental design. Don't ever use this in production.
 > It was created to demonstrate a concept for educational purposes. Just use libsodium.
 
@@ -40,3 +43,19 @@ try {
     exit(1);
 }
 ```
+
+# Frequently Asked Questions
+
+## ![Is this SHA-256 Encryption?](docs/imgflip-sha256-encryption.jpg)
+
+SHA-256 isn't encryption. SHA-256 is a hash function.
+
+I did build an AEAD cipher *out of* SHA-256.
+
+## Should I use this?
+
+No.
+
+## Are you insane?!
+
+Well, I am [a furry](https://soatok.com)...
