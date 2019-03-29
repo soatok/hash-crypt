@@ -21,7 +21,7 @@
   "require": {
     "php": "^7",
     "paragonie/constant_time_encoding": "^2",
-    "phpunit/phpunit": "^8",
+    "phpunit/phpunit": "^7|^8",
     "vimeo/psalm": "^3"
   }
 }
